@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import PageDefault from "../../../components/PageDefault";
-import FormField from "../../../components/FormField";
-import Button from "../../../components/Button";
+import React, { useState, useEffect } from 'react';
+import PageDefault from '../../../components/PageDefault';
+import FormField from '../../../components/FormField';
+import Button from '../../../components/Button';
 
 function RegisterCategory() {
   const defaultValues = {
-    title: "",
-    description: "",
-    color: "",
+    id: 0,
+    title: '',
+    description: '',
+    color: '',
   };
 
   const [categories, setCategories] = useState([]);
@@ -22,7 +23,7 @@ function RegisterCategory() {
   }
 
   useEffect(() => {
-    fetch("https://urioflix-json-server.herokuapp.com/categories")
+    fetch('https://urioflix-json-server.herokuapp.com/categories')
       .then(async (response) => {
         if (response.ok) {
           const r = await response.json();
@@ -71,8 +72,8 @@ function RegisterCategory() {
         <Button>Confirm</Button>
       </form>
       <ul>
-        {categories.map((category, index) => (
-          <li key={index}>{category.title}</li>
+        {categories.map((category) => (
+          <li key={category.id}>{category.title}</li>
         ))}
       </ul>
     </PageDefault>
