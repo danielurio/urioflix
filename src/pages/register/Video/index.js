@@ -65,7 +65,7 @@ function RegisterVideo() {
       <br />
       <br />
 
-      <Link to="/cadastro/category">
+      <Link to="/register/category">
         Category Register
       </Link>
     </PageDefault>

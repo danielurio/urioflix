@@ -17,7 +17,7 @@ function RegisterCategory() {
   const { values, handleChange, clearForm } = userForm(defaultValues);
 
   useEffect(() => {
-    categoriesRepository.getAllCategories()
+    categoriesRepository.getAll()
       .then((response) => { setCategories(response); })
       .catch((error) => console.log(error));
   }, []);
