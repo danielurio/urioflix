@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 
 const Label = styled.label``;
 Label.Text = styled.span``;
@@ -62,8 +62,8 @@ const Input = styled.input`
   ${({ value }) => {
     const hasValue = value.length > 0;
     return (
-      hasValue &&
-      css`
+      hasValue
+      && css`
         &:not([type="color"]) + ${Label.Text} {
           transform: scale(0.6) translateY(-10px);
         }
@@ -72,17 +72,17 @@ const Input = styled.input`
   }}
 `;
 
-function FormField({ label, type, name, value, onChange }) {
-  const fieldId = `id_${name}`;
-  const isTypeTextArea = type === "textarea";
-  const tag = isTypeTextArea ? "textarea" : "input";
+function FormField({
+  label, type, name, value, onChange,
+}) {
+  const isTypeTextArea = type === 'textarea';
+  const tag = isTypeTextArea ? 'textarea' : 'input';
 
   return (
     <FormFieldWrapper>
-      <Label htmlFor={fieldId}>
+      <Label>
         <Input
           as={tag}
-          id={fieldId}
           type={type}
           name={name}
           value={value}
@@ -95,8 +95,8 @@ function FormField({ label, type, name, value, onChange }) {
 }
 
 FormField.defaultProps = {
-  type: "text",
-  value: "",
+  type: 'text',
+  value: '',
   onChange: () => {},
 };
 

@@ -2,25 +2,18 @@ import React, { useState, useEffect } from 'react';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
+import userForm from '../../../hooks/userForm';
 
 function RegisterCategory() {
   const defaultValues = {
     id: 0,
     title: '',
     description: '',
-    color: '',
+    color: '#000000',
   };
 
   const [categories, setCategories] = useState([]);
-  const [values, setValues] = useState(defaultValues);
-
-  function setValue(key, value) {
-    setValues({ ...values, [key]: value });
-  }
-  function handleChange(info) {
-    const { name, value } = info.target;
-    setValue(name, value);
-  }
+  const { values, handleChange, clearForm } = userForm(defaultValues);
 
   useEffect(() => {
     fetch('https://urioflix-json-server.herokuapp.com/categories')
@@ -45,13 +38,13 @@ function RegisterCategory() {
         onSubmit={(info) => {
           info.preventDefault();
           setCategories([...categories, values]);
-          setValues(defaultValues);
+          clearForm();
         }}
       >
         <FormField
           label="Category Name:"
           type="text"
-          name="name"
+          name="title"
           value={values.title}
           onChange={handleChange}
         />
