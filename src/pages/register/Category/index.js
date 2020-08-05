@@ -22,19 +22,24 @@ function RegisterCategory() {
       .catch((error) => console.log(error));
   }, []);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    categoriesRepository.create({ ...values })
+      .then((category) => {
+        setCategories([...categories, category]);
+        clearForm();
+      })
+      .catch((error) => { console.log(error); });
+  };
+
   return (
     <PageDefault>
       <h1>
         Register Category:
         {values.title}
       </h1>
-      <form
-        onSubmit={(info) => {
-          info.preventDefault();
-          setCategories([...categories, values]);
-          clearForm();
-        }}
-      >
+      <form onSubmit={handleSubmit}>
         <FormField
           label="Category Name:"
           type="text"
@@ -60,17 +65,21 @@ function RegisterCategory() {
       </form>
       <table>
         <thead>
-          <td>Title</td>
-          <td>Description</td>
-          <td>Color</td>
-        </thead>
-        {categories.map((category) => (
           <tr>
-            <td>{category.title}</td>
-            <td>{category.description}</td>
-            <td>{category.color}</td>
+            <td>Title</td>
+            <td>Description</td>
+            <td>Color</td>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {categories.map((category) => (
+            <tr key={category.id}>
+              <td>{category.title}</td>
+              <td>{category.description}</td>
+              <td>{category.color}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </PageDefault>
   );

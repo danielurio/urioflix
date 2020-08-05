@@ -2,7 +2,7 @@ import { URL_API } from '../config';
 
 const URL_CATEGORIES = `${URL_API}/categories`;
 
-async function getAllCategoriesWithVideos() {
+async function getAllWithVideos() {
   const response = await fetch(`${URL_CATEGORIES}/?_embed=videos`);
   if (response.ok) {
     return response.json();
@@ -10,7 +10,7 @@ async function getAllCategoriesWithVideos() {
   throw new Error('Something went wrong when fetching data from the server');
 }
 
-async function getAllCategories() {
+async function getAll() {
   const response = await fetch(URL_CATEGORIES);
   if (response.ok) {
     return response.json();
@@ -26,10 +26,11 @@ async function create(category) {
     },
     body: JSON.stringify(category),
   });
+
   if (response.ok) {
     return response.json();
   }
   throw new Error('Something went wrong when getting data from the server');
 }
 
-export default { getAllCategoriesWithVideos, getAllCategories, create };
+export default { getAllWithVideos, getAll, create };

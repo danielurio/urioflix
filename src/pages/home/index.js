@@ -8,7 +8,7 @@ function Home() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    categoriesRepository.getAllCategoriesWithVideos()
+    categoriesRepository.getAllWithVideos()
       .then((response) => { setCategories(response); })
       .catch((error) => { console.log(error.message); });
   }, []);
