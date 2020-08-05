@@ -9,12 +9,8 @@ function Home() {
 
   useEffect(() => {
     categoriesRepository.getAllCategoriesWithVideos()
-      .then((response) => {
-        setCategories(response);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+      .then((response) => { setCategories(response); })
+      .catch((error) => { console.log(error.message); });
   }, []);
 
   return (

@@ -3,6 +3,7 @@ import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 import userForm from '../../../hooks/userForm';
+import categoriesRepository from '../../../repositories/categories';
 
 function RegisterCategory() {
   const defaultValues = {
@@ -16,15 +17,8 @@ function RegisterCategory() {
   const { values, handleChange, clearForm } = userForm(defaultValues);
 
   useEffect(() => {
-    fetch('https://urioflix-json-server.herokuapp.com/categories')
-      .then(async (response) => {
-        if (response.ok) {
-          const r = await response.json();
-          setCategories(r);
-          return;
-        }
-        throw new Error("Couldn't get data");
-      })
+    categoriesRepository.getAllCategories()
+      .then((response) => { setCategories(response); })
       .catch((error) => console.log(error));
   }, []);
 
@@ -64,11 +58,20 @@ function RegisterCategory() {
         />
         <Button>Confirm</Button>
       </form>
-      <ul>
+      <table>
+        <thead>
+          <td>Title</td>
+          <td>Description</td>
+          <td>Color</td>
+        </thead>
         {categories.map((category) => (
-          <li key={category.id}>{category.title}</li>
+          <tr>
+            <td>{category.title}</td>
+            <td>{category.description}</td>
+            <td>{category.color}</td>
+          </tr>
         ))}
-      </ul>
+      </table>
     </PageDefault>
   );
 }
